@@ -14,12 +14,12 @@ app.post("/signup",(req,res)=>{
     try {
         const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         req.body.password = hashedPassword;
-        let data = fs.readFileSync(path.join(__dirname, "day14", "user.json"),"utf-8")
+        let data = fs.readFileSync(path.join(__dirname, "user.json"),"utf-8")
         if(data.trim().length > 0){
             users = JSON.parse(data);
         }
         users.push(req.body);
-        fs.writeFileSync(path.join(__dirname, "day14", "user.json"), JSON.stringify(users,null,2),"utf-8")
+        fs.writeFileSync(path.join(__dirname, "user.json"), JSON.stringify(users,null,2),"utf-8")
         res.status(200).json({message:"successfully registered"});
     }
     catch (err){
@@ -29,7 +29,7 @@ app.post("/signup",(req,res)=>{
 
 app.post("/login",(req,res)=>{
     try{
-        let data = fs.readFileSync(path.join(__dirname, "day14", "user.json"),"utf-8")
+        let data = fs.readFileSync(path.join(__dirname, "user.json"),"utf-8")
         const users = JSON.parse(data);
 
         let user = users.find((user) => user.email === req.body.email)
