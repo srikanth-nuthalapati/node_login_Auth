@@ -18,7 +18,7 @@ app.post("/signup",(req,res)=>{
             users = JSON.parse(data);
         }
         users.push(req.body);
-        fs.writeFileSync(__dirname + "day14/user.json",JSON.stringify(users,null,2),"utf-8")
+        fs.writeFileSync(__dirname + "/user.json",JSON.stringify(users,null,2),"utf-8")
         res.status(200).json({message:"successfully registered"});
     }
     catch (err){
