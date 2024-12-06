@@ -10,19 +10,22 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.post("/signup",(req,res)=>{
-    let users = [];
     try {
+        let users = [];
         const hashedPassword = bcrypt.hashSync(req.body.password, 10);
         req.body.password = hashedPassword;
+
+        console.log(__dirname);
         let data = fs.readFileSync(path.join(__dirname, "user.json"),"utf-8")
-        if(data.trim().length > 0){
+        if(data.trim().length > 0)
             users = JSON.parse(data);
-        }
+
         users.push(req.body);
         fs.writeFileSync(path.join(__dirname, "user.json"), JSON.stringify(users,null,2),"utf-8")
         res.status(200).json({message:"successfully registered"});
     }
     catch (err){
+        console.log("errpr");
         res.status(500).json({error:"registration failed"});
     }
 })
