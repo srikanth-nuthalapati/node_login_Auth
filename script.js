@@ -22,7 +22,7 @@ app.post("/signup",(req,res)=>{
         res.status(200).json({message:"successfully registered"});
     }
     catch (err){
-        res.json({error:"registration failed"}).status(500);
+        res.status(500).json({error:"registration failed"});
     }
 })
 
@@ -39,15 +39,15 @@ app.post("/login",(req,res)=>{
                 res.status(200).json({message:"Login Successfull"});
             }
             else{
-                res.json({message:"Invalid Password"}).status(401);
+                res.status(401).json({message:"Invalid Password"});
             }
         }
         else{
-            res.json({message:"Invalid Email"}).status(401);
+            res.status(401).json({message:"Invalid Email"});
         }
     }
     catch(err){
-        res.json({message:"login failed"}).status(500);
+        res.status(500).json({message:"login failed"});
     }
 })
 
